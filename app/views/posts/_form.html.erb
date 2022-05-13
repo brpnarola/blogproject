@@ -1,0 +1,34 @@
+<%= form_with model: @post, local: true do |f| %>
+
+
+
+  <div>
+    <% if @post.errors.any? %>
+    <li class="alert alert-danger"> <%= @post.errors.full_messages %> </li>
+  <% end %>
+  </div>
+
+  <div>
+      <%= f.label :title %>
+      <%= f.text_field :title ,class: "form-control"%>
+  </div><br />
+
+  <div>
+  <%= f.label :image %>
+  <%= f.file_field :image,class: "form-control" %>
+  </div>
+
+  <div>
+      <%= f.label :description %>
+      <%= f.text_area :description ,class: "form-control"%>
+  </div><br />
+
+  <div>
+    <%= f.label :category_id, id: :category_id , class:'form-label'%><br/>
+    <%= f.collection_select(:category_id, Category.all, :id, :title, {}, {multiple: false, class: 'dropdown-item',class: "form-control"}) %>
+  </div> <br />
+
+  <div>
+      <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

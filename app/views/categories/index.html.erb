@@ -1,0 +1,21 @@
+<%= link_to "Add New Category" , new_category_path %> <br/>
+<table border="1" class="table table-bordered">
+    <tr> <td colspan="5" style="text-align:center;"> <h4> Category Details </h4> </tr>
+
+    <tr>
+      <td> Id </td>
+      <td> Category Title </td>
+      <td colspan="3"> Crud Opetaion </td>
+    </tr>
+
+      <% @categories.each do |c| %>
+    <tr>
+      <td> <%= c.id %> </td>
+      <td> <%= c.title %> </td>
+      <td> <%= link_to "Show" , category_path(c), class: "btn btn-info"%> </td>
+      <td> <%= link_to "Edit" , edit_category_path(c),class: "btn btn-info" %> </td>
+      <td> <%= link_to "Delete" , category_path(c), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
+    </tr>
+      <% end %>
+
+</table>

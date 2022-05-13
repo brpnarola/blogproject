@@ -1,0 +1,28 @@
+<table border="1" class="table table-bordered">
+    <tr> <td colspan="5" style="text-align:center;"> <h4> Post Details </h4> </tr>
+
+    <tr>
+      <td> Post Title </td>
+      <td> Description </td>
+      <td> Images </td>
+      <td> Category Id </td>
+      <td> Post Id </td>
+      <td colspan="3"> Crud Opetaion </td>
+    </tr>
+
+    <tr>
+      <td> <%= @post.title %> </td>
+      <td> <%= @post.description %> </td>
+      <td>
+      <% (0...@post.image.count).each do |img| %>
+        <%= image_tag(@post.image[img], size:"100x100")%>
+      <% end %>
+    </td>
+      <td> <%= @post.category_id %> </td>
+      <td> <%= @post.user_id %> </td>
+      <td> <%= link_to "Edit" , edit_post_path(@post),class: "btn btn-info" %> </td>
+      <td> <%= link_to "Delete" , post_path(@post), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
+    </tr>
+</table>
+
+<%= link_to "Back" , posts_path %>

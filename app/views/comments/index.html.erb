@@ -1,0 +1,31 @@
+<%= link_to "Add New Comment" , new_comment_path %> <br/>
+<table border="1" class="table table-bordered">
+    <tr> <td colspan="5" style="text-align:center;"> <h4> Comment Details </h4> </tr>
+
+    <tr>
+      <td> Id </td>
+      <td> Image </td>
+      <td> Description </td>
+      <td> Post Id </td>
+      <td> User Id </td>
+      <td colspan="3"> Crud Opetaion </td>
+    </tr>
+
+      <% @comment.each do |comment| %>
+    <tr>
+      <td> <%= comment.id %> </td>
+      <td> <%= comment.description %> </td>
+      <td>
+      <% (0...comment.image.count).each do |img| %>
+        <%= image_tag(comment.image[img], size:"100x100")%>
+      <% end %>
+    </td>
+      <td> <%= comment.post_id %> </td>
+      <td> <%= comment.user_id %> </td>
+      <td> <%= link_to "Show" , comment_path(comment), class: "btn btn-info"%> </td>
+      <td> <%= link_to "Edit" , edit_comment_path(comment),class: "btn btn-info" %> </td>
+      <td> <%= link_to "Delete" , comment_path(comment), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
+    </tr>
+      <% end %>
+
+</table>
