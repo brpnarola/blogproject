@@ -1,8 +1,16 @@
+<%= form_for  :post do |form|%>
+
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert"><%= flash[:notice] %></div>
+<% end %>
+
 <%= link_to "Add New Post" , new_post_path %> <br/>
+
 <table border="1" class="table table-bordered">
-    <tr> <td colspan="5" style="text-align:center;"> <h4> Post Details </h4> </tr>
+    <tr> <td colspan="10" style="text-align:center;"> <h4> Post Details </h4> </tr>
 
     <tr>
+      <td> </td>
       <td> Id </td>
       <td> Title </td>
       <td> Image </td>
@@ -10,24 +18,44 @@
       <td> Category Id </td>
       <td> User Id </td>
       <td colspan="3"> Crud Opetaion </td>
+      <td> <%= link_to "Approve All",approve_all_post_posts_path(), method: :put %> </td>
     </tr>
+
 
       <% @post.each do |post| %>
     <tr>
+      <td>
+        <% if post.post_status == false %>
+          <%= form.check_box :checkbox_array[] ,post.id %>
+        <% else %>
+          <%= "okk" %>
+        <% end %>
+      </td>
       <td> <%= post.id %> </td>
       <td> <%= post.title %> </td>
       <td>
       <% (0...post.image.count).each do |img| %>
         <%= image_tag(post.image[img], size:"100x100")%>
       <% end %>
-    </td>
+      </td>
       <td> <%= post.description %> </td>
       <td> <%= post.category_id %> </td>
       <td> <%= post.user_id %> </td>
-      <td> <%= link_to "Show" , post_path(post), class: "btn btn-info"%> </td>
-      <td> <%= link_to "Edit" , edit_post_path(post),class: "btn btn-info" %> </td>
+      <td> <%= link_to "Show" , post_path(post), class: "btn btn-primary" %> </td>
+      <td> <%= link_to "Edit" , edit_post_path(post),class: "btn btn-primary" %> </td>
       <td> <%= link_to "Delete" , post_path(post), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
+      <td>
+        <% if post.post_status==true %>
+            <%=  "Approve Complete" %>
+        <% else %>
+         <%= link_to "Approve", approve_post_path(post), method: :put%>
+        <% end %>
+      </td>
     </tr>
-      <% end %>
+        <% end %>
+
 
 </table>
+
+
+<% end %>

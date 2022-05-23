@@ -12,8 +12,8 @@
     <tr>
       <td> <%= c.id %> </td>
       <td> <%= c.title %> </td>
-      <td> <%= link_to "Show" , category_path(c), class: "btn btn-info"%> </td>
-      <td> <%= link_to "Edit" , edit_category_path(c),class: "btn btn-info" %> </td>
+      <td> <%= link_to "Show" , category_path(c), class: "btn btn-primary"%> </td>
+      <td> <%= link_to "Edit" , edit_category_path(c),class: "btn btn-primary" %> </td>
       <td> <%= link_to "Delete" , category_path(c), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
     </tr>
       <% end %>

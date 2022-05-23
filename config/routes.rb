@@ -4,9 +4,21 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :dashboard, only: %i[index show]
-  resources :categories, :posts, :comments
-  resources :members
-  
+  resources :categories, :comments, :members
+  resources :posts do
+    member do
+      put :approve
+    end
+
+    collection do
+      put :approve_all_post
+    end
+  end
+
+
+
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'dashboard#index'
 end

@@ -1,18 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title> Blog</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
+    <%= stylesheet_link_tag 'application' %>
   </head>
+  <body class="hold-transition sidebar-mini layout-fixed">
+  <!-- Site wrapper -->
+    <div class="wrapper">
+      <%= render "base/header" %>
+      <!-- =============================================== -->
+      <!-- Left side column. contains the sidebar -->
+      <%= render "base/sidebar" %>
+      <!-- =============================================== -->
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
 
-  <body>
-    <%= yield %>
+        <div class="notice"> </div
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Fixed Layout</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">Layout</a></li>
+                  <li class="breadcrumb-item active">Fixed Layout</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <%= yield %>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+
+      <!-- /.content-wrapper -->
+      <%= render "base/footer" %>
+      <!-- Control Sidebar -->
+      <%= render "base/control_sidebar" %>
+    </div>
   </body>
 </html>
