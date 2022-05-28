@@ -16,7 +16,8 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 # Use Postgres Database
 gem 'pg'
 # Boostrap Gem
-gem 'bootstrap', '~> 5.1', '>= 5.1.3'
+gem 'bootstrap', '~> 4.6', '>= 4.6.1'
+gem 'sprockets', '~> 3.7.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Boostrap jquery
@@ -52,7 +53,8 @@ group :development do
   # letter_opener for email handling
   gem 'letter_opener', '~> 1.8', '>= 1.8.1'
 end
-
+## Admin theme
+gem 'adminlte-rails'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
@@ -60,6 +62,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

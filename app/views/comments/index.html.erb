@@ -22,8 +22,8 @@
     </td>
       <td> <%= comment.post_id %> </td>
       <td> <%= comment.user_id %> </td>
-      <td> <%= link_to "Show" , comment_path(comment), class: "btn btn-info"%> </td>
-      <td> <%= link_to "Edit" , edit_comment_path(comment),class: "btn btn-info" %> </td>
+      <td> <%= link_to "Show" , comment_path(comment), class: "btn btn-primary"%> </td>
+      <td> <%= link_to "Edit" , edit_comment_path(comment),class: "btn btn-primary" %> </td>
       <td> <%= link_to "Delete" , comment_path(comment), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
     </tr>
       <% end %>
