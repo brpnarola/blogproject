@@ -3,14 +3,17 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %w[show edit update destroy]
 
+  ## list categories
   def index
     @categories = Category.all
   end
 
+  ## new category
   def new
     @category = Category.new
   end
 
+  ## create new category
   def create
     @category = current_user.categories.new(category_params)
     if @category.save
@@ -20,12 +23,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  ## get category
   def show
   end
 
+  ## edit category
   def edit
   end
 
+  ## update category
   def update
     if  @category.update(category_params)
       redirect_to categories_path
@@ -34,6 +40,7 @@ class CategoriesController < ApplicationController
     end
   end
 
+  ## destroy category
   def destroy
     @category.destroy
     redirect_to categories_path
