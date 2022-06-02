@@ -1,17 +1,15 @@
 <table border="1" class="table table-bordered">
-    <tr> <td colspan="5" style="text-align:center;"> <h4> Category Details </h4> </tr>
-
-    <tr>
-      <td> Category Title </td>
-      <td colspan="3"> Crud Opetaion </td>
-    </tr>
-
-    <tr>
-
-      <td> <%= @category.title %> </td>
-      <td> <%= link_to "Edit" , edit_category_path(@category),class: "btn btn-info" %> </td>
-      <td> <%= link_to "Delete" , category_path(@category), method: :delete,class: "btn btn-danger" %></td>
-    </tr>
+  <tr>
+    <td colspan="5" style="text-align:center;"> <h4> Category Details </h4>
+  </tr>
+  <tr>
+    <td> Category Title </td>
+    <td colspan="3"> Crud Opetaion </td>
+  </tr>
+  <tr>
+    <td> <%= @category.title %> </td>
+    <td> <%= link_to "Edit", edit_category_path(@category), class: "btn btn-info" %> </td>
+    <td> <%= link_to "Delete", category_path(@category), method: :delete, class: "btn btn-danger" %></td>
+   </tr>
 </table>
-
-<%= link_to "Back" , categories_path %>
+<%= link_to "Back", categories_path %>

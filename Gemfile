@@ -15,6 +15,8 @@ gem 'puma', '~> 4.1'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 # Use Postgres Database
 gem 'pg'
+# for trace the code
+gem 'pry', '~> 0.14.1'
 # Boostrap Gem
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 # Use SCSS for stylesheets
@@ -36,6 +38,7 @@ gem 'active_storage_validations', '~>0.8'
 gem 'image_processing', '~> 1.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+# admin_lte use for admin dashboard
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

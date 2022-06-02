@@ -1,28 +1,25 @@
-
-<table border="1" class="table table-bordered">
-    <tr> <td colspan="5" style="text-align:center;"> <h4> Comment Details </h4> </tr>
-
-    <tr>
-      <td> Description </td>
-      <td> Image </td>
-      <td> Post Id </td>
-      <td> User Id </td>
-      <td colspan="3"> Crud Opetaion </td>
-    </tr>
-
-    <tr>
-
-      <td> <%= @comment.description %> </td>
-      <td>
-      <% (0...@comment.image.count).each do |img| %>
-        <%= image_tag(@comment.image[img], size:"100x100")%>
-      <% end %>
+<table class="table table-bordered">
+  <tr>
+    <td colspan="5" style="text-align:center;"> <h4> Comment Details </h4>
+  </tr>
+  <tr>
+    <td> Description </td>
+    <td> Image </td>
+    <td> Post Id </td>
+    <td> User Id </td>
+    <td colspan="3"> Crud Opetaion </td>
+  </tr>
+  <tr>
+    <td> <%= @comment.description %> </td>
+    <td>
+         <% (0...@comment.image.count).each do |img| %>
+          <%= image_tag(@comment.image[img], size:"100x100")%>
+         <% end %>
     </td>
-      <td> <%= @comment.post_id %> </td>
-      <td> <%= @comment.user_id %> </td>
-      <td> <%= link_to "Edit" , edit_comment_path(@comment),class: "btn btn-info" %> </td>
-      <td> <%= link_to "Delete" , comment_path(@comment), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
-    </tr>
+    <td> <%= @comment.post_id %> </td>
+    <td> <%= @comment.user_id %> </td>
+    <td> <%= link_to "Edit", edit_comment_path(@comment),class: "btn btn-info" %> </td>
+    <td> <%= link_to "Delete", comment_path(@comment), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger" %></td>
+  </tr>
 </table>
-
-<%= link_to "Back" , comments_path %>
+<%= link_to "Back", comments_path %>

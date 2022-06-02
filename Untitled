@@ -1,0 +1,22 @@
+=====okk=====
+$(document).ready(function()
+{
+  $(".approve").on("click", function()
+  {
+    var y = this.value
+    var post_id = $('#post_ids').val();
+    if (post_id == "")
+    {
+      $('#post_ids').val(y);
+    }
+    else
+    {
+      $('#post_ids').val(post_id + "," + y);
+    }
+    console.log(post_ids.value)
+  });
+});
+
+
+https://jquery.com/
+(19:45:53) mpt: https://api.jquery.com

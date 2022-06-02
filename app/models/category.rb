@@ -6,5 +6,6 @@ class Category < ApplicationRecord
   has_many   :posts
 
   # Validation
-  validates :title, presence: true
+  validates :title, presence: true, format: { with: /\A[a-zA-Z]+\z/,
+    message: "only allows letters" }
 end

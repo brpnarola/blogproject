@@ -1,33 +1,42 @@
-<%= link_to "Add New Post" , new_post_path %> <br/>
-<table border="1" class="table table-bordered">
-    <tr> <td colspan="5" style="text-align:center;"> <h4> Post Details </h4> </tr>
-
-    <tr>
-      <td> Id </td>
-      <td> Title </td>
-      <td> Image </td>
-      <td> Description </td>
-      <td> Category Id </td>
-      <td> User Id </td>
-      <td colspan="3"> Crud Opetaion </td>
-    </tr>
-
-      <% @post.each do |post| %>
-    <tr>
-      <td> <%= post.id %> </td>
-      <td> <%= post.title %> </td>
-      <td>
-      <% (0...post.image.count).each do |img| %>
-        <%= image_tag(post.image[img], size:"100x100")%>
-      <% end %>
+<%= link_to "Add New Post", new_post_path %> <br/>
+<table class="table table-bordered">
+  <%= form_tag approve_all_post_path(:post_ids), method: :put do %>
+    <%= hidden_field_tag :post_ids %>
+    <%= submit_tag "All Approve" %>
+  <% end %>
+  <tr>
+    <td colspan="5" style="text-align:center;"> <h4> Post Details </h4>
+  </tr>
+  <tr>
+    <td> </td>
+    <td> Id </td>
+    <td> Title </td>
+    <td> Description </td>
+    <td> Category Name </td>
+    <td> User Name </td>
+    <td colspan="3"> Crud Opetaion </td>
+  </tr>
+  <% @posts.each do |post| %>
+  <tr>
+    <td>
+        <% unless post.approval %>
+          <%= check_box_tag "post_#{post.id}", post.id, false, class: "approve" %>
+        <% end %>
     </td>
-      <td> <%= post.description %> </td>
-      <td> <%= post.category_id %> </td>
-      <td> <%= post.user_id %> </td>
-      <td> <%= link_to "Show" , post_path(post), class: "btn btn-info"%> </td>
-      <td> <%= link_to "Edit" , edit_post_path(post),class: "btn btn-info" %> </td>
-      <td> <%= link_to "Delete" , post_path(post), method: :delete,data: {confirm: 'Are You sure'},class: "btn btn-danger" %></td>
-    </tr>
-      <% end %>
-
+    <td> <%= post.id %> </td>
+    <td> <%= post.title %> </td>
+    <td> <%= post.description %> </td>
+    <td> <%= link_to post.category.title, categories_path %> </td>
+    <td> <%= post.user.username %> </td>
+    <td> <%= link_to "Show", post_path(post), class: "btn btn-info"%> </td>
+    <td> <%= link_to "Edit", edit_post_path(post), class: "btn btn-info" %></td>
+    <td> <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger" %></td>
+    <td> <% if post.approval %>
+          <%= 'Approve' %>
+         <% else %>
+          <%= link_to "Approve", approve_post_path(post), method: :patch %>
+         <% end %>
+    </td>
+  </tr>
+  <% end %>
 </table>
