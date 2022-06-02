@@ -1,36 +1,30 @@
-  $(document).ready(function()
+$(document).ready(function()
+{
+  $(".approve").click(function()
   {
-    $(".approve").click(function()
+    if ($(this).prop("checked") == true)
     {
-      if ($(this).prop("checked") == true)
+      var t = this.value;
+      var post_id = $('#post_ids').val();
+      if (post_id == "")
       {
-        var t = this.value;
-        var post_id = $('#post_ids').val();
-        if (post_id == "")
-        {
-          $('#post_ids').val(t);
-        }
-        else
-        {
-          $('#post_ids').val(post_id + "," + t);
-        }
+        $('#post_ids').val(t);
       }
-     else
+      else
       {
-
+        $('#post_ids').val(post_id + "," + t);
+      }
+        console.log(post_ids);
+    }
+     else
+    {
         //binding.pry
-        var val = $('#post_ids').val();
-        var post_ids = val.split(",");
-        var x = post_ids.indexOf($(this).val());
-        //alert('unchecked')
-        post_ids.splice(x,1);
-        //console.log(post_ids.value)
-        //$('#post_ids').val("")
-        // add checked values
-        //$('#post_ids').val("232")
+      var val = $('#post_ids').val();
+      var post_ids = val.split(",");
+      var x = post_ids.indexOf($(this).val());
+      //alert('unchecked')
+      post_ids.splice(x,1);
+      console.log(post_ids);
      }
-console.log(post_ids);
-
   });
-
 });
