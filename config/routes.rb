@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :dashboard, only: %i[index show]
   resources :categories, :comments
-  resources :members
+
+  resources :users do
+    member do
+      patch :set_role_admin
+    end
+  end
+
   resources :posts do
     member do
       patch :approve

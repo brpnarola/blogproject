@@ -16,8 +16,8 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      AdminMailer.with(user: current_user.username).welcome_email.deliver_later
-      redirect_to posts_path
+      AdminMailer.with(user: current_user.username).admin_recieved_mail.deliver_later
+      redirect_to posts_path(@post)
       flash[:notice] = "Email Send Successfully"
     else
       render 'new'
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   ## update post
   def update
     if @post.update(post_params)
-      redirect_to posts_path
+      redirect_to posts_path(@post)
     else
       render :edit
     end
