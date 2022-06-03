@@ -8,25 +8,25 @@ $(document).ready(function()
       var post_id = $('#post_ids').val();
       if (post_id == "")
       {
-
         $('#post_ids').val(t);
       }
       else
       {
         $('#post_ids').val(post_id + "," + t);
       }
-
-      console.log(post_ids);
     }
     else
     {
-      //binding.pry
-      var val = $('#post_ids').val();
-      var post_ids = val.split(",");
-      var x = post_ids.indexOf($(this).val());
-      //alert('unchecked')
-      post_ids.splice(x,1);
-      console.log(post_ids);
+      var checkbox_value = ""
+      $('.approve').each(function ()
+      {
+        if (this.checked)
+        {
+          current_value = this.value;
+          checkbox_value += (checkbox_value=="" ? current_value : "," + current_value )
+        }
+      });
+    $('#post_ids').val(checkbox_value);
     }
   });
 });
