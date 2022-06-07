@@ -1,67 +1,143 @@
 $(document).ready(function()
 {
-  $(".approve").click(function()
+  // Approve Post In Post Table Using Fom_Tag hidden_field_tag
+  // $(".approve").click(function()
+  // {
+  //   if ($(this).prop("checked") == true)
+  //   {
+  //     var t = this.value;
+  //     var post_id = $('#post_ids').val();
+  //     if (post_id == "")
+  //     {
+  //       $('#post_ids').val(t);
+  //     }
+  //     else
+  //     {
+  //       $('#post_ids').val(post_id + "," + t);
+  //     }
+  //   }
+  //   else
+  //   {
+  //     var checkbox_value = ""
+  //     $('.approve').each(function ()
+  //     {
+  //       if (this.checked)
+  //       {
+  //         var current_value = this.value;
+  //         checkbox_value += (checkbox_value=="" ? current_value : "," + current_value)
+  //       }
+  //     });
+  //   $('#post_ids').val(checkbox_value);
+  //   }
+  // });
+
+  // Change User Role as Admin And Multiple delete using Form Tag & Hidden Field Tag
+  // $(".approve_checkbox").click(function()
+  // {
+  //   if ($(this).prop("checked") == true)
+  //   {
+  //     var t = this.value;
+  //     var user_id = $('#user_ids').val();
+  //     var user_id = $('#user_ids1').val();
+  //     if (user_id == "")
+  //     {
+  //       $('#user_ids').val(t);
+  //       $('#user_ids1').val(t);
+  //     }
+  //     else
+  //     {
+  //       $('#user_ids').val(user_id + "," + t);
+  //       $('#user_ids1').val(user_id + "," + t);
+  //     }
+  //   }
+  //   else
+  //   {
+  //     var checkbox_value = ""
+  //     $('.approve_admin').each(function ()
+  //     {
+  //       if (this.checked)
+  //       {
+  //         var current_value = this.value;
+  //         checkbox_value += (checkbox_value=="" ? current_value : "," + current_value)
+  //       }
+  //     });
+  //   $('#user_ids').val(checkbox_value);
+  //   $('#user_ids1').val(checkbox_value);
+  //
+  //   }
+  // });
+
+    // ajax for approve post in Post table
+  $("#approve_post").on("click", function()
   {
-    if ($(this).prop("checked") == true)
+    var post_ids = []
+    $('.approve').each(function ()
     {
-      var t = this.value;
-      var post_id = $('#post_ids').val();
-      if (post_id == "")
+      if (this.checked)
       {
-        $('#post_ids').val(t);
+        post_ids.push($(this).val())
       }
-      else
-      {
-        $('#post_ids').val(post_id + "," + t);
-      }
-    }
-    else
+    });
+    $.ajax (
     {
-      var checkbox_value = ""
-      $('.approve').each(function ()
+      url: "posts/approve_all",
+      method: "put",
+      data: { post_ids: post_ids },
+      success: function()
       {
-        if (this.checked)
-        {
-          var current_value = this.value;
-          checkbox_value += (checkbox_value=="" ? current_value : "," + current_value)
-        }
-      });
-    $('#post_ids').val(checkbox_value);
-    }
+        console.log("success");
+        location.reload();
+      }
+    });
   });
 
-  
-  $(".approve_admin").click(function()
+  // ajax code for Change User Role as Admin In User Table
+  $("#admin_role").on("click", function()
   {
-    if ($(this).prop("checked") == true)
+    var user_roles = []
+    $(".approve_checkbox").each(function()
     {
-      var t = this.value;
-      var user_id = $('#user_ids').val();
-      if (user_id == "")
+      if (this.checked)
       {
-        $('#user_ids').val(t);
+        user_roles.push($(this).val())
       }
-      else
-      {
-        $('#user_ids').val(user_id + "," + t);
-      }
-    }
-    else
+    });
+
+    $.ajax(
     {
-      var checkbox_value = ""
-      $('.approve_admin').each(function ()
+      url: "users/set_role_admin",
+      method: "put",
+      data: {user_roles: user_roles},
+      success: function()
       {
-        if (this.checked)
-        {
-          var current_value = this.value;
-          checkbox_value += (checkbox_value=="" ? current_value : "," + current_value)
-        }
-      });
-    $('#user_ids').val(checkbox_value);
-    }
+        console.log("Success");
+        location.reload();
+      }
+    });
   });
 
+  // ajax for multiple user delete
+  $("#multiple_user_delete").on("click", function()
+  {
+    var user_data = []
+    $(".approve_checkbox").each(function()
+    {
+      if (this.checked)
+      {
+        user_data.push($(this).val())
+      }
+    });
 
-
-
+    $.ajax(
+    {
+      url: "users/destroy_multiple",
+      method: "put",
+      data: {user_data: user_data},
+      success: function()
+      {
+        console.log("success")
+        location.reload();
+      }
+    });
+  });
 });

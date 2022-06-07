@@ -1,9 +1,10 @@
-<%= link_to "Add New Post", new_post_path %> <br/>
+<%= link_to "Add New Post", new_post_path, class: "btn btn-primary"%><br/><br/>
 <table class="table table-bordered">
-  <%= form_tag approve_all_post_path(:post_ids), method: :put do %>
-    <%= hidden_field_tag :post_ids %>
-    <%= submit_tag "All Approve" %>
-  <% end %>
+  <%= button_tag "All Approve", type: "button", class: "btn btn-primary" , id: "approve_post"%>
+  <%# <%= form_tag approve_all_posts_path, method: :put do %> %>
+    <%# <%= hidden_field_tag :post_ids %> %>
+    <%# <%= submit_tag "All Approve", class: "btn btn-primary" %> %>
+  <%# <% end %> %>
   <tr>
     <td colspan="5" style="text-align:center;"> <h4> Post Details </h4>
   </tr>
@@ -34,7 +35,7 @@
     <td> <% if post.approval %>
           <%= 'Approve' %>
          <% else %>
-          <%= link_to "Approve", approve_post_path(post), method: :patch %>
+          <%= link_to "Approve", approve_post_path(post), method: :put %>
          <% end %>
     </td>
   </tr>

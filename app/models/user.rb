@@ -13,5 +13,10 @@ class User < ApplicationRecord
 
   # Validation
   validates :username, presence: true, format: { with: /\A[a-zA-Z]+\z/,
-                                                 message: 'only allows letters' }
+                                       message: 'only allows letters' }
+
+  # enum declaration
+  enum role: [ :admin, :user ]
+
+
 end

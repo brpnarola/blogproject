@@ -7,14 +7,17 @@ Rails.application.routes.draw do
   resources :categories, :comments
 
   resources :users do
-    member do
-      patch :set_role_admin
+    collection do
+      put :set_role_admin
+      put :destroy_multiple
     end
   end
 
   resources :posts do
     member do
-      patch :approve
+      put :approve
+    end
+    collection do
       put :approve_all
     end
   end

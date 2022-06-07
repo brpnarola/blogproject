@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 class PostsController < ApplicationController
   before_action :set_post, only: %w[show update destroy edit approve]
+  skip_before_action :verify_authenticity_token, only: :approve_all
 
   ## list posts
   def index

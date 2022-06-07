@@ -1,14 +1,9 @@
 <table class="table table-bordered">
-  <% if current_user.role == 'admin' %>
   <tr>
     <td colspan="5" style="text-align:center;"><h4> All User Details</h4></td>
   </tr>
-
-  <%= form_tag set_role_admin_user_path(:user_ids), method: :patch do %>
-    <%= hidden_field_tag :user_ids %>
-    <%= submit_tag "Change Role as Admin" %>
-  <% end %>
-
+  <%= button_tag "Change User Role As Admin", type: "button", id: "admin_role", class: "btn btn-primary"%><br/><br/>
+  <%= button_tag "Multiple Delete", type: "button", id: "multiple_user_delete", class: "btn btn-primary"%><br/><br/>
   <tr>
     <td> </td>
     <td> Id </td>
@@ -16,21 +11,16 @@
     <td> Email </td>
     <td> User Role </td>
   </tr>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
   <tr>
-      <% unless user.role == 'admin'%>
-    <td> <%= check_box_tag "user_#{user.id}", user.id, false, class: "approve_admin" %> </td>
-    <td> <%= user.id %> </td>
-    <td> <%= user.username %> </td>
-    <td> <%= user.email %>
-    <td> <%= user.role %> </td>
-    <td> <%= link_to "Edit", edit_user_path(user),class: "btn btn-info" %></td>
-    <td> <%= link_to "Delete", user_path(user), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger" %></td>
+    <% unless user.role == 'admin'%>
+      <td> <%= check_box_tag "user_#{user.id}", user.id, false, class: "approve_checkbox" %> </td>
+      <td> <%= user.id %> </td>
+      <td> <%= user.username %> </td>
+      <td> <%= user.email %>
+      <td> <%= user.role %> </td>
+      <td> <%= link_to "Delete", user_path(user), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger", remote: true %></td>
   </tr>
-      <% end %>
-    <% end %>
-   <% else %>
-      <h1> You Are Not Admin User </h1>
-    <%= redirect_to root_path %>
    <% end %>
+  <% end %>
 </table>
