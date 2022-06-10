@@ -1,26 +1,49 @@
+<% if current_user.role == "admin" %>
 <table class="table table-bordered">
+ <tr>
+   <td colspan="5" style="text-align:center;"><h4> All User Details</h4></td>
+ </tr>
+ <%= form_tag destroy_multiple_users_path, method: :get do %>
+  <%= hidden_field_tag :user_ids%>
+  <%= submit_tag "Multiple Delete", class: "btn btn-primary" %>
+ <% end %><br/><br/>
+ <%= form_tag set_role_admin_users_path, method: :patch  do %>
+  <%= hidden_field_tag :user_ids1%>
+  <%= submit_tag "Change User Role As Admin", class: "btn btn-primary" %>
+ <% end %>
   <tr>
-    <td colspan="5" style="text-align:center;"><h4> All User Details</h4></td>
-  </tr>
-  <%= button_tag "Change User Role As Admin", type: "button", id: "admin_role", class: "btn btn-primary"%><br/><br/>
-  <%= button_tag "Multiple Delete", type: "button", id: "multiple_user_delete", class: "btn btn-primary"%><br/><br/>
-  <tr>
-    <td> </td>
-    <td> Id </td>
-    <td> Username </td>
-    <td> Email </td>
-    <td> User Role </td>
+   <td> </td>
+   <td> Id </td>
+   <td> Username </td>
+   <td> Email </td>
+   <td> User Role </td>
+   <td> User Status </td>
   </tr>
   <% @users.each do |user| %>
   <tr>
-    <% unless user.role == 'admin'%>
-      <td> <%= check_box_tag "user_#{user.id}", user.id, false, class: "approve_checkbox" %> </td>
-      <td> <%= user.id %> </td>
-      <td> <%= user.username %> </td>
-      <td> <%= user.email %>
-      <td> <%= user.role %> </td>
-      <td> <%= link_to "Delete", user_path(user), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger", remote: true %></td>
+    <% unless user.delete_status %>
+   <td> <%= check_box_tag "user_#{user.id}", user.id, false, class: "approve_checkbox" %> </td>
+   <td><%= user.id %> </td>
+   <td><%= user.username %> </td>
+   <td><%= user.email %>
+   <td><%= user.role %> </td>
+   <td>
+       <% if user.user_status%>
+        <%= "Active" %>
+       <% else %>
+        <%= link_to "Approve", user_status_active_user_path(user), method: :patch, class: "btn btn-primary"%>
+       <% end %>
+   </td>
+   <td>
+       <% unless user.delete_status %>
+        <%= link_to "Soft Delete", soft_delete_user_path(user), method: :patch, data: {confirm: 'Are You sure'}, class: "btn btn-danger"%>
+       <% end %>
+   </td>
   </tr>
-   <% end %>
+    <% end %>
   <% end %>
 </table>
+<% else %>
+ <%= "You Are Not Authorized"%><br/>
+ <%= link_to "Back", dashboard_index_path, class: "btn btn-primary"%>
+<% end %>

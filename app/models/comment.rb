@@ -8,6 +8,6 @@ class Comment < ApplicationRecord
 
   # Validation
   validates :description, presence: true
-  validates :image, presence: true,
-                    content_type: ['image/jpg', 'image/jpeg', 'image/png', { size: { less_than: 1.megabytes } }]
+  #validates :image, presence: true,
+                    #content_type: ['image/jpg', 'image/jpeg', 'image/png', { size: { less_than: 1.megabytes } }]
 end

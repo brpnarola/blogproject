@@ -1,10 +1,6 @@
 <%= link_to "Add New Post", new_post_path, class: "btn btn-primary"%><br/><br/>
 <table class="table table-bordered">
-  <%= button_tag "All Approve", type: "button", class: "btn btn-primary" , id: "approve_post"%>
-  <%# <%= form_tag approve_all_posts_path, method: :put do %> %>
-    <%# <%= hidden_field_tag :post_ids %> %>
-    <%# <%= submit_tag "All Approve", class: "btn btn-primary" %> %>
-  <%# <% end %> %>
+<%= button_tag "All Approve", id: :approve_post, class: "btn btn-info", remote: false %>
   <tr>
     <td colspan="5" style="text-align:center;"> <h4> Post Details </h4>
   </tr>
@@ -15,29 +11,32 @@
     <td> Description </td>
     <td> Category Name </td>
     <td> User Name </td>
-    <td colspan="3"> Crud Opetaion </td>
+    <td colspan="3" align="center"> Crud Opetaion </td>
   </tr>
   <% @posts.each do |post| %>
   <tr>
+   <% unless post.post_delete_status %>
     <td>
-        <% unless post.approval %>
-          <%= check_box_tag "post_#{post.id}", post.id, false, class: "approve" %>
-        <% end %>
+      <% unless post.approval %>
+        <%= check_box_tag "post_#{post.id}", post.id, false, class: "approve" %>
+      <% end %>
     </td>
     <td> <%= post.id %> </td>
     <td> <%= post.title %> </td>
     <td> <%= post.description %> </td>
     <td> <%= link_to post.category.title, categories_path %> </td>
-    <td> <%= post.user.username %> </td>
+    <td> <%= post.user.nil? ? "" : post.user.username %> </td>
     <td> <%= link_to "Show", post_path(post), class: "btn btn-info"%> </td>
     <td> <%= link_to "Edit", edit_post_path(post), class: "btn btn-info" %></td>
-    <td> <%= link_to "Delete", post_path(post), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger" %></td>
+    <td> <%= link_to "Soft Delete", soft_delete_post_path(post), method: :patch, data: {confirm: 'Are You sure'}, class: "btn btn-danger" %></td>
     <td> <% if post.approval %>
           <%= 'Approve' %>
          <% else %>
-          <%= link_to "Approve", approve_post_path(post), method: :put %>
+          <%= link_to "Approve", approve_post_path(post), method: :patch %>
          <% end %>
     </td>
+    <td>  </td>
   </tr>
+   <% end %>
   <% end %>
 </table>

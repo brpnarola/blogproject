@@ -1,27 +1,38 @@
-<table class="table table-bordered">
+<table>
+ <tr>
+  <td colspan="5" style="text-align:center;"> <h4> Post Details </h4>
+ </tr>
+ <tr>
+  <td> Post Title </td>
+  <td> <%= @post.title %> </td>
+ </tr>
+ <tr>
+  <td> Description </td>
+  <td> <%= @post.description %> </td>
+ </tr>
+ <tr>
+  <td> Images </td>
+  <td>
+   <% (0...@post.image.count).each do |img| %>
+    <%= image_tag(@post.image[img], size:"100x100")%>
+   <% end %>
+  </td>
+ </tr>
   <tr>
-    <td colspan="5" style="text-align:center;"> <h4> Post Details </h4>
+     <td> <b> <h4>All Comments </td>
   </tr>
+
   <tr>
-    <td> Post Title </td>
-    <td> Description </td>
-    <td> Images </td>
-    <td> Category Id </td>
-    <td> Post Id </td>
-    <td colspan="3"> Crud Opetaion </td>
-  </tr>
-  <tr>
-    <td> <%= @post.title %> </td>
-    <td> <%= @post.description %> </td>
+   <td colspan="2">
+   <%= form_with model: [@post, @comment], method: :post, local: true do |f| %>
+    <%= f.hidden_field :post_id, value:@post.id %>
+    <% @post.comments.each do |comment|%>
+      <%= comment.description %> <br/>
+    <% end %>
+    <%= f.label :description %>
+    <%= f.rich_text_area :description %>
+    <%= f.submit class: "btn btn-info" %>
+   <% end %>
     <td>
-         <% (0...@post.image.count).each do |img| %>
-          <%= image_tag(@post.image[img], size:"100x100")%>
-         <% end %>
-    </td>
-    <td> <%= @post.category_id %> </td>
-    <td> <%= @post.user_id %> </td>
-    <td> <%= link_to "Edit", edit_post_path(@post), class: "btn btn-info" %> </td>
-    <td> <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: 'Are You sure'}, class: "btn btn-danger" %></td>
   </tr>
 </table>
-<%= link_to "Back", posts_path %>

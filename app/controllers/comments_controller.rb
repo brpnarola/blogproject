@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_params)
     if @comment.save
-      redirect_to comments_path
+      redirect_to post_path(params[:post_id])
     else
-      render 'new'
+      redirect_to post_path(params[:post_id],@comment)
     end
   end
 
@@ -45,6 +45,7 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to comments_path
   end
+
 
   private
 
