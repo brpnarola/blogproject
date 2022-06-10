@@ -1,0 +1,21 @@
+<table class="table table-bordered">
+ <tr class="table-success">
+  <td>Post Id </td>
+  <td>Title </td>
+  <td>Description  </td>
+  <td>Category Id </td>
+  <td>User Id </td>
+  <td colspan="2" align="center">Action </td>
+</tr>
+<% @posts.each do |post| %>
+<tr >
+  <td> <%= post.id %> </td>
+  <td> <%= post.title %> </td>
+  <td> <%= post.description %> </td>
+  <td> <%= post.category_id %> </td>
+  <td> <%= post.user_id %> </td>
+  <td> <%= link_to "Restore", restore_post_path(post), method: :patch, class: "btn btn-info"%> </td>
+  <td> <%= link_to "Permanent Delete", post_path(post), method: :delete, data:{confirm: "Are You Sure"}, class: "btn btn-danger" %></td>
+</tr>
+<% end %>
+</table>

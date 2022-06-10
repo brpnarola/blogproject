@@ -1,0 +1,21 @@
+<table class="table table-bordered">
+ <tr class="table-success">
+  <td>User Id </td>
+  <td>Username </td>
+  <td>Email  </td>
+  <td>User Role </td>
+  <td>User Status </td>
+  <td colspan="2" align="center">Action </td>
+</tr>
+<% @users.each do |user| %>
+<tr >
+  <td> <%= user.id %> </td>
+  <td> <%= user.username %> </td>
+  <td> <%= user.email %> </td>
+  <td> <%= user.role %> </td>
+  <td> <%= user.user_status %> </td>
+  <td> <%= link_to "Restore", restore_user_path(user), method: :patch, class: "btn btn-info"%> </td>
+  <td> <%= link_to "Permanent Delete", user_path(user), method: :delete, data:{confirm: "Are You Sure"}, class: "btn btn-danger" %></td>
+</tr>
+<% end %>
+</table>
