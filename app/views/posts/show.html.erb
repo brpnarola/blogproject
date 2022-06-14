@@ -1,38 +1,55 @@
 <table>
- <tr>
-  <td colspan="5" style="text-align:center;"> <h4> Post Details </h4>
- </tr>
- <tr>
-  <td> Post Title </td>
-  <td> <%= @post.title %> </td>
- </tr>
- <tr>
-  <td> Description </td>
-  <td> <%= @post.description %> </td>
- </tr>
- <tr>
-  <td> Images </td>
-  <td>
-   <% (0...@post.image.count).each do |img| %>
-    <%= image_tag(@post.image[img], size:"100x100")%>
+<tr>
+ <td colspan="5" style="text-align:center;"> <h4> Post View </h4>
+</tr>
+<tr>
+ <td> Post Title </td>
+ <td> <%= @post.title %> </td>
+</tr>
+<tr>
+ <td> Category </td>
+ <td> <%= @post.category.title %> </td>
+</tr>
+<tr>
+ <td> Username </td>
+ <td> <%= @post.user.username %> </td>
+</tr>
+<tr>
+ <td> Description </td>
+ <td> <%= @post.description %> </td>
+</tr>
+<tr>
+ <td> Images </td>
+ <td>
+  <% (0...@post.image.count).each do |img| %>
+   <%= image_tag(@post.image[img], size:"100x100")%>
+  <% end %>
+ </td>
+</tr>
+<tr>
+ <td> <b> <h4> All Comments </td>
+</tr>
+<tr>
+ <td>
+  <% @comments.order(:id).each do |comment| %>
+    <% if comment.id  %>
+     <%= comment.description %>
+     <%= link_to "Edit", edit_post_comment_path(@post,comment.id), class: "btn btn-info" %>
+     <%= link_to "Delete", post_comment_path(@post,comment.id), method: :delete, data:{ confirm: "Are You Sure"}, class: "btn btn-danger" %></<br/>
    <% end %>
-  </td>
- </tr>
-  <tr>
-     <td> <b> <h4>All Comments </td>
-  </tr>
-
-  <tr>
-   <td colspan="2">
-   <%= form_with model: [@post, @comment], method: :post, local: true do |f| %>
-    <%= f.hidden_field :post_id, value:@post.id %>
-    <% @post.comments.each do |comment|%>
-      <%= comment.description %> <br/>
-    <% end %>
-    <%= f.label :description %>
-    <%= f.rich_text_area :description %>
-    <%= f.submit class: "btn btn-info" %>
-   <% end %>
-    <td>
-  </tr>
+  <% end %>
+ </td>
+</tr>
+<fieldset>
+<tr>
+ <td colspan="2">
+ <%= form_with model: [@post, @comment], method: :post, local: true do |f| %>
+  <%= f.hidden_field :post_id, value:@post.id %><br/><br/>
+  <%= f.label :description, value:"New Comment" %>
+  <%= f.rich_text_area :description, cols: 30, rows: 100 %><br/><br/>
+  <%= f.submit class: "btn btn-info" %>
+ <% end %>
+ </td>
+</tr>
+</fieldset>
 </table>

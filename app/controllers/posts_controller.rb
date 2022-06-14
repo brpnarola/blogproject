@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   ## list posts
   def index
     if current_user.role == "admin"
-     @posts = Post.all
+     @posts = Post.all.order(:id)
    else
      @posts = Post.where(user_id:current_user.id)
    end
@@ -31,6 +31,7 @@ class PostsController < ApplicationController
 
   ## get post
   def show
+    @comments = @post.comments
     @comment = @post.comments.new
   end
 

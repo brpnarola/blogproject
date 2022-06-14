@@ -10,3 +10,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= custom.js
+//= require trix/dist/trix
+//= @rails/actiontext

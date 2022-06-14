@@ -1,22 +1,20 @@
-<%= form_with model: @comment, local: true do |f| %>
+<%= form_with model: @comment, url: post_comment_path, method: :patch, local: true do |f| %>
+ <% if @comment!=nil %>
   <% if @comment.errors.any? %>
   <div>
-    <li class="alert alert-danger"> <%= @comment.errors.full_messages %> </li>
+    <li class="alert alert-danger"> <%= @comment.errors.full_messages %></li>
   <% end %>
+ <% end %>
   </div>
   <div>
-  <%= f.label :description %>
-  <%= f.text_area :description, class: "form-control"%>
-  </div><br />
+ <%= f.label :description %>
+ <%= f.rich_text_area :description, class: "form-control"%>
+  </div><br/>
   <div>
-  <%= f.label :image %>
-  <%= f.file_field :image, class: "form-control"%>
-  </div>
+  <%= f.hidden_field :user_id, value:@comment.user.id %>
+  <%= f.hidden_field :post_id, value:@comment.post_id %>
+  </div> <br/>
   <div>
-  <%= f.label :post_id, id: :post_id, class: 'form-label'%><br/>
-  <%= f.collection_select(:post_id, Post.all, :id, :title, {}, {multiple: false, class: 'dropdown-item', class: "form-control"}) %>
-  </div> <br />
-  <div>
-  <%= f.submit class: "btn btn-primary" %>
+ <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

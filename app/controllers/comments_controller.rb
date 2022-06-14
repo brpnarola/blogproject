@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %w[show edit update destroy]
+  before_action :set_comment, only: %w[destroy edit update destroy]
 
   ## list comments
   def index
-    @comments = Comment.all
+    @comments = Comment.all.order(:id)
   end
 
   ## new comment
@@ -19,12 +19,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(params[:post_id])
     else
-      redirect_to post_path(params[:post_id],@comment)
+      redirect_to post_path(params[:post_id])
     end
-  end
-
-  ## get comment
-  def show
   end
 
   ## edit comment
@@ -34,7 +30,7 @@ class CommentsController < ApplicationController
   ## update comment
   def update
     if @comment.update(comment_params)
-      redirect_to comments_path
+      redirect_to post_path(params[:post_id])
     else
       render :edit
     end
@@ -43,7 +39,7 @@ class CommentsController < ApplicationController
   ## delete comment
   def destroy
     @comment.destroy
-    redirect_to comments_path
+    redirect_to post_path(params[:post_id])
   end
 
 
@@ -56,4 +52,5 @@ class CommentsController < ApplicationController
   def set_comment
     @comment = Comment.find_by(id: params[:id])
   end
+
 end
