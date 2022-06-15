@@ -1,0 +1,20 @@
+<%= form_with model: @comment, url: post_comment_path, method: :patch, remote: true do |f| %>
+ <% if @comment!=nil %>
+  <% if @comment.errors.any? %>
+  <div>
+    <li class="alert alert-danger"> <%= @comment.errors.full_messages %></li>
+  <% end %>
+ <% end %>
+  </div>
+  <div>
+ <%= f.label :description %>
+ <%= f.rich_text_area :description, class: "form-control"%>
+  </div><br/>
+  <div>
+  <%= f.hidden_field :user_id, value:@comment.user.id %>
+  <%= f.hidden_field :post_id, value:@comment.post_id %>
+  </div> <br/>
+  <div>
+ <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
