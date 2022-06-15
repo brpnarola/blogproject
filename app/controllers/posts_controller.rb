@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      AdminMailer.with(user: current_user.username).admin_recieved_mail.deliver_later
+      AdminMailer.with(user: current_user).admin_recieved_mail.deliver_later
       redirect_to posts_path(@post)
       flash[:notice] = "Email Send Successfully"
     else
@@ -50,6 +50,7 @@ class PostsController < ApplicationController
 
   ## delete post
   def destroy
+    PostOwnerMailer.with(user: @post.user,login_user: current_user).postowner_recieved_mail_post_permanent_delete.deliver_later
     @post.destroy
     redirect_to soft_delete_post_data_posts_path
   end
@@ -73,8 +74,10 @@ class PostsController < ApplicationController
 
   ## change post_delete_status for soft delete
   def soft_delete
+    PostOwnerMailer.with(user: @post.user,login_user: current_user).postowner_recieved_mail_post_delete.deliver_later
     @post.update(post_delete_status:true)
     redirect_to posts_path
+    flash[:notice] = "Email Send Successfully"
   end
 
   ## list all soft delete data in post table
@@ -89,6 +92,7 @@ class PostsController < ApplicationController
 
   ## restore soft delete data from post table
   def restore
+    PostOwnerMailer.with(user: @post.user,login_user: current_user).postowner_recieved_mail_post_restore.deliver_later
     @post.update(post_delete_status:false)
     redirect_to soft_delete_post_data_posts_path
   end

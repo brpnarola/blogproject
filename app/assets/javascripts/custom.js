@@ -47,4 +47,10 @@ $(document).ready(function()
       }
     });
 
+
+      $("#edit_button").click(function(){
+      $("#actiontext1").hide();
+     });
+  
+
  }); //main end

@@ -32,24 +32,31 @@
 <tr>
  <td>
   <% @comments.order(:id).each do |comment| %>
-    <% if comment.id  %>
+    <% unless comment.description.nil? %>
      <%= comment.description %>
-     <%= link_to "Edit", edit_post_comment_path(@post,comment.id), class: "btn btn-info" %>
+     <%= link_to "Edit", edit_post_comment_path(@post,comment.id), class: "btn btn-info", id: :edit_button, remote:true %>
      <%= link_to "Delete", post_comment_path(@post,comment.id), method: :delete, data:{ confirm: "Are You Sure"}, class: "btn btn-danger" %></<br/>
    <% end %>
   <% end %>
  </td>
 </tr>
-<fieldset>
+<tr>
+ <td>
+  <div id="edit_comment" >
+  </div>
+ </td>
+</tr>
 <tr>
  <td colspan="2">
- <%= form_with model: [@post, @comment], method: :post, local: true do |f| %>
+  <div id="actiontext1" >
+  <%= form_with model: [@post, @comment], method: :post, local: true do |f| %>
   <%= f.hidden_field :post_id, value:@post.id %><br/><br/>
   <%= f.label :description, value:"New Comment" %>
   <%= f.rich_text_area :description, cols: 30, rows: 100 %><br/><br/>
   <%= f.submit class: "btn btn-info" %>
- <% end %>
+  <% end %>
+ </div>
  </td>
 </tr>
-</fieldset>
+
 </table>

@@ -25,6 +25,9 @@ class CommentsController < ApplicationController
 
   ## edit comment
   def edit
+    respond_to do |format|
+      format.js
+   end
   end
 
   ## update comment
