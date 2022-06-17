@@ -48,9 +48,10 @@ $(document).ready(function()
     });
 
 
-      $("#edit_button").click(function(){
-      $("#actiontext1").hide();
-     });
-  
+    //$(document).on("click","#edit_link",function(){
+    //$("#actiontext1").hide();
+    // });
+
+
 
  }); //main end

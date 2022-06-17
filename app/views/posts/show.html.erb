@@ -1,4 +1,10 @@
 <table>
+<div id="e1"
+<tr id="err1">
+  <td> </td>
+</tr>
+</div>
+
 <tr>
  <td colspan="5" style="text-align:center;"> <h4> Post View </h4>
 </tr>
@@ -29,32 +35,26 @@
 <tr>
  <td> <b> <h4> All Comments </td>
 </tr>
-<tr>
- <td>
+
+  <div id="commentrecord">
   <% @comments.order(:id).each do |comment| %>
     <% unless comment.description.nil? %>
-     <%= comment.description %>
-     <%= link_to "Edit", edit_post_comment_path(@post,comment.id), class: "btn btn-info", id: :edit_button, remote:true %>
-     <%= link_to "Delete", post_comment_path(@post,comment.id), method: :delete, data:{ confirm: "Are You Sure"}, class: "btn btn-danger" %></<br/>
-   <% end %>
+      <%= render 'comment_row', comment: comment %>
+    <% end %>
   <% end %>
- </td>
-</tr>
-<tr>
- <td>
-  <div id="edit_comment" >
   </div>
- </td>
-</tr>
+
+
 <tr>
  <td colspan="2">
   <div id="actiontext1" >
-  <%= form_with model: [@post, @comment], method: :post, local: true do |f| %>
-  <%= f.hidden_field :post_id, value:@post.id %><br/><br/>
-  <%= f.label :description, value:"New Comment" %>
-  <%= f.rich_text_area :description, cols: 30, rows: 100 %><br/><br/>
-  <%= f.submit class: "btn btn-info" %>
-  <% end %>
+    <%= form_with model: [@post, @comment], method: :post, remote: true do |f| %>
+    <%= f.hidden_field :post_id, value:@post.id %><br/><br/>
+    <%= f.label :description, value:"New Comment" %>
+    <%= f.rich_text_area :description, cols: 30, rows: 100 %><br/><br/>
+    <%= f.submit class: "btn btn-info" %>
+    <% end %>
+
  </div>
  </td>
 </tr>

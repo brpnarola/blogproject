@@ -16,10 +16,16 @@ class CommentsController < ApplicationController
   ## create new comment
   def create
     @comment = current_user.comments.new(comment_params)
-    if @comment.save
-      redirect_to post_path(params[:post_id])
-    else
-      redirect_to post_path(params[:post_id])
+
+      respond_to do |format|
+          if @comment.save
+          format.js
+          redirect_to post_path(params[:post_id])
+          else
+            puts @comment.errors.full_messages
+            format.js
+            #redirect_to post_path(params[:post_id])
+          end
     end
   end
 
@@ -27,7 +33,7 @@ class CommentsController < ApplicationController
   def edit
     respond_to do |format|
       format.js
-   end
+    end
   end
 
   ## update comment
@@ -41,8 +47,11 @@ class CommentsController < ApplicationController
 
   ## delete comment
   def destroy
-    @comment.destroy
-    redirect_to post_path(params[:post_id])
+    respond_to do |format|
+      @comment.destroy
+      format.js
+      redirect_to post_path(params[:post_id])
+    end
   end
 
 

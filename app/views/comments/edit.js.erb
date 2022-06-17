@@ -1,1 +1,1 @@
-$("#edit_comment").html("<%= j render(partial: 'edit', locals: { comment: @comment }) %>");
+$("#commentrecord").append("<%= escape_javascript render ('comment_row', @comment.id)%>");
