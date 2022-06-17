@@ -1,0 +1,9 @@
+<tr id="user_row_<%= comment.id %>">
+  <td>
+    <div id="edit_div">
+ <%= comment.description %>
+    </div>
+ <%= link_to "Edit", edit_post_comment_path(@post,comment.id), class: "btn btn-info", id: :edit_button, remote:true %>
+ <%= link_to "Delete", post_comment_path(@post,comment.id), method: :delete, data:{ confirm: "Are You Sure"}, class: "btn btn-danger", remote:true %></<br/>
+  </td>
+</tr>
