@@ -16,24 +16,21 @@ class CommentsController < ApplicationController
   ## create new comment
   def create
     @comment = current_user.comments.new(comment_params)
-
-      respond_to do |format|
-          if @comment.save
-          format.js
-          redirect_to post_path(params[:post_id])
-          else
-            puts @comment.errors.full_messages
-            format.js
-            #redirect_to post_path(params[:post_id])
-          end
+    respond_to do |format|
+     if @comment.save
+     format.html {
+     return redirect_to post_path(params[:post_id]), notice: "Successfully Add Comment!" }
+     format.js
+      #format.json { head :post_path(params[:post_id]) }
+      #redirect_to post_path(params[:post_id])
+     else
+      redirect_to post_path(params[:post_id])
+     end
     end
   end
 
   ## edit comment
   def edit
-    respond_to do |format|
-      format.js
-    end
   end
 
   ## update comment

@@ -1,5 +1,1 @@
-<% if @comment.errors.any?  %>
-  <%= @comment.errors.full_messages %>
-<% else %>
-  $("#commentrecord").html("<%= escape_javascript render ('comment_row', comment: @comment)%>");
-<% end %>
+$("#commentrecord").html("<%= escape_javascript render ('comment_row', comment: @comment)%>");
